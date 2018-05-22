@@ -1,16 +1,3 @@
-
-# coding: utf-8
-
-# <b>Algorithmic Phainomena: Deepdream CNN example with Rembrandt's Aristotle</b>
-# 
-# "We must, in the next place, investigate the subject of the dream, and first inquire to which of the faculties of the soul it presents itself, i.e. whether the affection is one which pertains to the faculty of intelligence or to that of sense-perception; for these are the only faculties within us by which we acquire knowledge." 
-# Aristotle, On Dreams
-# 
-# 
-
-# In[1]:
-
-
 from __future__ import print_function
 import os
 from io import BytesIO
@@ -19,10 +6,6 @@ from functools import partial
 import PIL.Image
 from IPython.display import clear_output, Image, display, HTML
 import tensorflow as tf
-
-
-# In[2]:
-
 
 model_fn = 'tensorflow_inception_graph.pb'
 graph = tf.Graph()
@@ -34,10 +17,6 @@ t_input = tf.placeholder(np.float32, name='input')
 imagenet_mean = 117.0
 t_preprocessed = tf.expand_dims(t_input-imagenet_mean, 0)
 tf.import_graph_def(graph_def, {'input':t_preprocessed})
-
-
-# In[3]:
-
 
 layers = [op.name for op in graph.get_operations() if op.type=='Conv2D' and 'import/' in op.name]
 feature_nums = [int(graph.get_tensor_by_name(name+':0').get_shape()[-1]) for name in layers]
@@ -91,10 +70,6 @@ def show_graph(graph_def, max_const_size=32):
 tmp_def = rename_nodes(graph_def, lambda s:"/".join(s.split('_',1)))
 show_graph(tmp_def)
 
-
-# In[4]:
-
-
 layer = 'mixed4d_3x3_bottleneck_pre_relu'
 channel = 135
 
@@ -127,10 +102,6 @@ def render_naive(t_obj, img0=img_noise, iter_n=20, step=1.0):
 
 render_naive(T(layer)[:,:,:,channel])
 
-
-# In[5]:
-
-
 img_noise = np.random.uniform(size=(224,224,3)) + 100.0
 
 def render_deepdream(t_obj, img0=img_noise,
@@ -157,10 +128,6 @@ def render_deepdream(t_obj, img0=img_noise,
             print('.',end = ' ')
         clear_output()
         showarray(img/255.0)
-
-
-# In[6]:
-
 
 def tffunc(*argtypes):
     placeholders = list(map(tf.placeholder, argtypes))
@@ -190,10 +157,6 @@ def calc_grad_tiled(img, t_grad, tile_size=512):
             grad[y:y+sz,x:x+sz] = g
     return np.roll(np.roll(grad, -sx, 1), -sy, 0)
 
-
-# In[7]:
-
-
 def render_deepdream(t_obj, img0=img_noise,
                      iter_n=10, step=1.5, octave_n=4, octave_scale=1.4):
     t_score = tf.reduce_mean(t_obj) 
@@ -218,19 +181,9 @@ def render_deepdream(t_obj, img0=img_noise,
         clear_output()
         showarray(img/255.0)
 
-
-# In[8]:
-
-
 img0 = PIL.Image.open('Rembrandt_Aristotle.jpg')
 img0 = np.float32(img0)
 showarray(img0/255.0)
 
 
-# In[9]:
-
-
 render_deepdream(tf.square(T('mixed4b')), img0)
-
-
-# "The wolf is at war with the ass, the bull, and the fox, for as being a carnivore, he attacks these other animals.... In regard to wild creatures, some sets are at enmity with other sets at all times and under all circumstances; others, as in the case of man and man, at special times and under incidental circumstances." Aristotle, History of Animals
