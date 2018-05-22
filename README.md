@@ -7,5 +7,6 @@
 
 ![](https://github.com/conceptform/Algorithmic-Phainomena/blob/master/NNModel.png)
 ![](https://github.com/conceptform/Algorithmic-Phainomena/blob/master/CNN_Tensorflow.jpeg)
+![](https://github.com/conceptform/Algorithmic-Phainomena/blob/master/CNN_layer1.png)
 
 <i> For Rembrandt's original oil on canvas (1653), click here: https://www.metmuseum.org/art/collection/search/437394 </i>
