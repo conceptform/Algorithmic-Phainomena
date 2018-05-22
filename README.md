@@ -5,6 +5,7 @@
 
 ![dreamaristotle](https://user-images.githubusercontent.com/39444491/40272970-ac797cce-5b85-11e8-8c70-033dd1a19349.jpg)
 
+![](https://github.com/conceptform/Algorithmic-Phainomena/blob/master/NNModel.png)
 ![](https://github.com/conceptform/Algorithmic-Phainomena/blob/master/CNN_Tensorflow.jpeg)
 
 <i> For Rembrandt's original oil on canvas (1653), click here: https://www.metmuseum.org/art/collection/search/437394 </i>
